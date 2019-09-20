@@ -34,6 +34,7 @@ foreach ($tmp->device as $device) {
 		echo '.label ';
 		echo preg_replace(array('/ß/', '/ä/', '/ö/', '/ü/'), array('ss', 'ae', 'oe', 'ue'), $device->name);
 	} else {
+		if ($device->present != 1) continue;
 		echo preg_replace('/[^a-zA-Z]/', '', $device->name);
 		echo '.value ';
 		echo ( $device->temperature->celsius / 10);
