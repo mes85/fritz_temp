@@ -29,14 +29,14 @@ if ($config) {
 
 foreach ($tmp->device as $device) {
 	if (!isset($device->temperature)) continue;
+	$name = preg_replace('/[^a-zA-Z]/', '', $device->name);
 	if ($config) {
-		echo preg_replace('/[^a-zA-Z]/', '', $device->name);
-		echo '.label ';
+		echo $name.'.graph_data_size custom 900d'.PHP_EOL;
+		echo $name.'.label ';
 		echo preg_replace(array('/ß/', '/ä/', '/ö/', '/ü/'), array('ss', 'ae', 'oe', 'ue'), $device->name);
 	} else {
 		if ($device->present != 1) continue;
-		echo preg_replace('/[^a-zA-Z]/', '', $device->name);
-		echo '.value ';
+		echo $name.'.value ';
 		echo ( $device->temperature->celsius / 10);
 	}
 	echo PHP_EOL;
